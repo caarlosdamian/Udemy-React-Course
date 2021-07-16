@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/Custom.css";
 
-const Card = ({ name, title, avatar, children,onChangeName }) => {
+const Card = ({ name, title, avatar,onDelete }) => {
   return (
     <div>
       <div className="card">
@@ -11,11 +11,10 @@ const Card = ({ name, title, avatar, children,onChangeName }) => {
             <b>{name}</b>
           </h4>
           <p>{title}</p>
-          <p><button className="button"
-          onClick={onChangeName}
-          >Change Name</button></p>
+          <p>
+            <button className="button button-red " onClick={onDelete}>Delete</button>
+          </p>
         </div>
-        <div>{children}</div>
       </div>
     </div>
   );

@@ -4,31 +4,51 @@ import React, { useState } from "react";
 import "./styles/Custom.css";
 
 function App() {
-  const [name, setName] = useState("Javier");
+  const [cards, setCards] = useState([
+{
+  name:'Danaris Scguster',
+  title: "International Operations producer",
+  avatar:"https://cdn.fakercloud.com/avatars/millinet_128.jpg"
 
-  const handleClick = () => {
-    setName("PADROEEBNFEHJW ");
-  };
-  const buttonsMarkup = (
-    <div>
-      <button className="button button2">Blue</button>
-      <button className="button button3">Red</button>
-    </div>
-  );
+},
+{
+  name:'Carlos  Damian',
+  title: "Musical Operations ",
+  avatar:"https://fakeimg.pl/350x200/?text=Hello"
+
+},
+{
+  name:'Danaris Scguster',
+  title: " Software producer",
+  avatar:"https://fakeimg.pl/300/"
+
+},
+
+  ]);
+  const [showCard, setShowCard] = useState(false);
+  const toggleShowCard = () => setShowCard(!showCard);
+  const deleteCardHandler = (cardIndex) =>{
+    const cardsCopy = [...cards]
+    cardsCopy.splice(cardIndex,1)
+    console.log(cardsCopy)
+    console.log('card' +cards)
+    setCards(cardsCopy)
+  }
 
   return (
     <div className="App">
-      <button className="button" onClick={handleClick}>
-        Change Name
+      <button className="button" onClick={toggleShowCard}>
+        Toggle
       </button>
-      <Card
-        name={name}
-        title="Global Research Associate"
-        avatar="https://cdn.fakercloud.com/avatars/millinet_128.jpg"
-        onChangeName={handleClick}
-      >
-        {buttonsMarkup}
-      </Card>
+      {showCard &&
+        cards.map((card,index) => (
+          <Card key={index}
+            name={card.name}
+            title={card.title}
+            avatar={card.avatar}
+            onDelete={() =>deleteCardHandler(index)}
+          />
+        ))}
     </div>
   );
 }
